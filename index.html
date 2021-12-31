@@ -28,7 +28,7 @@
                     let thumbnailImage = e.currentTarget.children[1];
                     let imageSrc = thumbnailImage.getAttribute("src").replace("-thumbnail", "");
                     let imageAlt = thumbnailImage.getAttribute("alt");
-                    let mainImage = document.getElementById("main-image");
+                    let mainImage = e.currentTarget.parentElement.parentElement.getElementsByClassName("main-image")[0];
                     mainImage.setAttribute("src", imageSrc);
                     mainImage.setAttribute("alt", imageAlt);
 
@@ -90,9 +90,64 @@
                 });
             }
             document.getElementById("checkout-cart-button").addEventListener("click", (e) => {
-                document.getElementById("cart-popup").style.display = null;
+                document.getElementById("cart-popup").style.display = "none";
                 return false;
             });
+            document.getElementById("close-button").addEventListener("click", (e) => {
+                document.getElementById("lightbox").style.display = "none";
+                return false;
+            });
+            document.getElementById("previous-button").addEventListener("click", (e) => {
+                let lightBoxThumbnailImages = document.querySelectorAll("#lightbox .thumbnails button");
+                for (let i = lightBoxThumbnailImages.length - 1; i >= 0; i--) {
+                    if (lightBoxThumbnailImages[i].classList.contains("active")) {
+                        lightBoxThumbnailImages[i].classList.remove("active");
+                        if (i > 0) {
+                            lightBoxThumbnailImages[i - 1].click();
+                            return;
+                        }
+                        else {
+                            lightBoxThumbnailImages[lightBoxThumbnailImages.length - 1].click();
+                        }
+                    }
+                }
+                return false;
+            });
+            document.getElementById("next-button").addEventListener("click", (e) => {
+                let lightBoxThumbnailImages = document.querySelectorAll("#lightbox .thumbnails button");
+                for (let i = 0; i < lightBoxThumbnailImages.length; i++) {
+                    if (lightBoxThumbnailImages[i].classList.contains("active")) {
+                        lightBoxThumbnailImages[i].classList.remove("active");
+                        if (i < (lightBoxThumbnailImages.length - 1)) {
+                            lightBoxThumbnailImages[i + 1].click();
+                            return;
+                        }
+                        else {
+                            lightBoxThumbnailImages[0].click();
+                        }
+                    }
+                }
+                return false;
+            });
+            document.getElementById("main-image-button").addEventListener("click", (e) => {
+                let mainImage = e.currentTarget.children[0];
+                let lightBoxMainImage = document.getElementById("lightbox").getElementsByClassName("main-image")[0];
+                lightBoxMainImage.setAttribute("src", mainImage.getAttribute("src"));
+                lightBoxMainImage.setAttribute("alt", mainImage.getAttribute("alt"));
+                let thumbnailImages = document.querySelectorAll("main .thumbnails button");
+                let lightBoxThumbnailImages = document.querySelectorAll("#lightbox .thumbnails button");
+                for (let i = 0; i < thumbnailImages.length; i++) {
+                    if (thumbnailImages[i].classList.contains("active")) {
+                        lightBoxThumbnailImages[i].classList.add("active");
+                    }
+                    else {
+                        lightBoxThumbnailImages[i].classList.remove("active");
+                    }
+                }
+                document.getElementById("lightbox").style.display = "block";
+                return false;
+            });
+
         });
     </script>
     <style>
@@ -238,6 +293,123 @@
             .actions > #add-to-cart-button:focus {
                 background-color: var(--hover-orange);
             }
+
+        #lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 11;
+        }
+
+            #lightbox.hidden {
+                display: none;
+            }
+
+            #lightbox > .overlay {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-color: black;
+                opacity: 0.5;
+            }
+
+            #lightbox > .content {
+                position: absolute;
+                margin: 0;
+                height: 100%;
+                width: 100%;
+            }
+
+                #lightbox > .content > div > .thumbnails > button > .overlay {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
+                    z-index: 10;
+                    display: none;
+                    border-radius: 0.625rem;
+                }
+
+                #lightbox > .content > div > .thumbnails > button > img {
+                    width: 100%;
+                    border-radius: 0.625rem;
+                }
+
+                #lightbox > .content > div > .thumbnails > button:hover > .overlay,
+                .product-images > .thumbnails > button:focus > .overlay {
+                    display: block;
+                }
+
+                #lightbox > .content > div > .thumbnails > button.active > .overlay,
+                #lightbox > .content > div > .thumbnails > button:active > .overlay {
+                    background: linear-gradient(0deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75));
+                    border: 0.125rem solid var(--orange);
+                    display: block;
+                }
+
+                #lightbox > .content > div > #previous-button {
+                    background-color: var(--white);
+                    width: 6.22vh;
+                    height: 6.22vh;
+                    top: 26.33vh;
+                    left: -3.11vh;
+                    align-items: center;
+                    justify-content: center;
+                    position: absolute;
+                    border-radius: 3.11vh;
+                }
+
+                #lightbox > .content > div > #next-button {
+                    background-color: var(--white);
+                    width: 6.22vh;
+                    height: 6.22vh;
+                    top: 26.33vh;
+                    right: -3.11vh;
+                    align-items: center;
+                    justify-content: center;
+                    position: absolute;
+                    border-radius: 3.11vh;
+                }
+
+                    #lightbox > .content > div > #previous-button > svg,
+                    #lightbox > .content > div > #next-button > svg {
+                        width: 0.5rem;
+                        height: 1rem;
+                        stroke: var(--very-dark-blue);
+                    }
+
+                    #lightbox > .content > div > #previous-button:hover > svg,
+                    #lightbox > .content > div > #previous-button:focus > svg,
+                    #lightbox > .content > div > #next-button:hover > svg,
+                    #lightbox > .content > div > #next-button:focus > svg {
+                        stroke: var(--orange);
+                    }
+
+                #lightbox > .content > div > #close-button {
+                    width: 2.22vh;
+                    height: 2.22vh;
+                    top: -4.88vh;
+                    right: 0;
+                    align-items: center;
+                    justify-content: center;
+                    position: absolute;
+                    background-color: transparent;
+                }
+
+                    #lightbox > .content > div > #close-button > svg {
+                        width: 100%;
+                        height: 100%;
+                        fill: var(--white);
+                    }
+
+                    #lightbox > .content > div > #close-button:hover > svg,
+                    #lightbox > .content > div > #close-button:focus > svg {
+                        fill: var(--orange);
+                    }
     </style>
 </head>
 <body class="container">
@@ -264,7 +436,7 @@
                 </ul>
             </div>
             <div class="right flex" style="align-items: center; padding-bottom: 0.25rem;">
-                <button id="view-cart-button" style="display: inline-block; margin-right: 2.875rem; line-height: 6.75rem; vertical-align: middle; background-color: inherit;">
+                <button id="view-cart-button" style="display: inline-block; margin-right: 2.875rem; line-height: 5rem; vertical-align: middle; background-color: inherit;">
                     <span style="position: relative;">
                         <svg style="height: 1.25rem; aspect-ratio: 1; vertical-align: middle;" class="cart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 20"><path d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z" fill-rule="nonzero" /></svg>
                         <span class="cart-num-of-products" style="position: absolute; top: -0.2rem; right: -0.3rem; width: 1.1875rem; font-weight: bold; font-size: 0.625rem; line-height: 0.8125rem; color: var(--white); background-color: var(--orange); border-radius: 0.40625rem; display: none;">3</span>
@@ -304,9 +476,9 @@
         </div>
     </header>
     <main class="flex" style="margin: 0 auto 8.25rem auto; width: 63.5rem; --gap: 7.8125rem;">
-        <div class="product-images" style="flex: 0 0 27.8125rem;">
-            <button style="width: 100%; border-radius: 0.9375rem; height: 27.8125rem;">
-                <img id="main-image" src="./images/image-product-1.jpg" alt="product 1" style="width: 100%; border-radius: 0.9375rem;" />
+        <div class="product-images" style="flex: 0 0 27.6rem;">
+            <button id="main-image-button" style="width: 100%; border-radius: 0.9375rem; height: 27.6rem; display: block;">
+                <img class="main-image" src="./images/image-product-1.jpg" alt="product 1" style="width: 100%; border-radius: 0.9375rem;" />
             </button>
             <div class="thumbnails flex" style="margin-top: 2rem; --gap: 1.9375rem; height: 5.5rem; justify-content: space-between;">
                 <button class="active">
@@ -355,6 +527,42 @@
             </div>
         </div>
     </main>
-
+    <!-- Modal -->
+    <div id="lightbox" style="display: none;">
+        <div class="overlay"></div>
+        <div class="content">
+            <div style="width: 61.11vh; top: 14.77vh; left: 50%; transform: translate(-50%, 0); position: absolute;">
+                <img class="main-image" src="./images/image-product-1.jpg" alt="product 1" style="height: 61.11vh; border-radius: 0.9375rem; display: block;" />
+                <div class="thumbnails flex" style="margin: 4.44vh 5.88vh 0 5.88vh; --gap: 3.44vh; height: 9.77vh; justify-content: space-between;">
+                    <button class="active" style="flex: 1; border-radius: 0.625rem; position: relative;">
+                        <div class="overlay"></div>
+                        <img src="./images/image-product-1-thumbnail.jpg" alt="product 1" style="height: 100%; border-radius: 0.625rem;" />
+                    </button>
+                    <button style="flex: 1; position: relative;">
+                        <div class="overlay"></div>
+                        <img src="./images/image-product-2-thumbnail.jpg" alt="product 2" style="height: 100%; border-radius: 0.625rem;" />
+                    </button>
+                    <button style="flex: 1; position: relative;">
+                        <div class="overlay"></div>
+                        <img src="./images/image-product-3-thumbnail.jpg" alt="product 3" style="height: 100%; border-radius: 0.625rem;" />
+                    </button>
+                    <button style="flex: 1; position: relative;">
+                        <div class="overlay"></div>
+                        <img src="./images/image-product-4-thumbnail.jpg" alt="product 4" style="height: 100%; border-radius: 0.625rem;" />
+                    </button>
+                </div>
+                <button id="close-button" class="flex">
+                    <svg viewBox="0 0 14 15" xmlns="http://www.w3.org/2000/svg"><path d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z" fill-rule="evenodd" /></svg>
+                </button>
+                <button id="previous-button" class="flex">
+                    <svg viewBox="0 0 12 18" xmlns="http://www.w3.org/2000/svg"><path d="M11 1 3 9l8 8" stroke-width="3" fill="none" fill-rule="evenodd" /></svg>
+                </button>
+                <button id="next-button" class="flex">
+                    <svg viewBox="0 0 13 18" xmlns="http://www.w3.org/2000/svg"><path d="m2 1 8 8-8 8" stroke-width="3" fill="none" fill-rule="evenodd" /></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- End modal -->
 </body>
 </html>
