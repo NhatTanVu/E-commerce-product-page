@@ -66,7 +66,7 @@
                     cartNumOfProducts += numOfProductsAdded;
                     for (let element of document.getElementsByClassName("cart-num-of-products")) {
                         element.innerText = cartNumOfProducts;
-                        element.style.display = null;
+                        element.style.display = "inline-block";
                     }
                     let cartTotalElement = document.getElementById("cart-total");
                     cartTotalElement.innerText = "$" + cartNumOfProducts * singleProductPrice + ".00";
@@ -152,24 +152,178 @@
     </script>
     <style>
         /* Header */
-        ul.navigation-menu > li > a:hover,
-        ul.navigation-menu > li > a:focus {
-            padding-bottom: 0 !important;
-            border-bottom: 0.25rem solid var(--orange);
+        header {
+            margin-bottom: 5.625rem;
+            position: relative;
         }
 
-        .right > a:hover > .avatar,
-        .right > a:focus > .avatar {
-            border: 0.25rem solid var(--orange);
-            border-radius: 1.8125rem;
-            height: 3.625rem !important;
-            margin: 0 !important;
-        }
+            header > .navigation-bar {
+                --gap: 0;
+                justify-content: space-between;
+            }
 
-        .right > button:hover > svg.cart,
-        .right > button:focus > svg.cart {
-            fill: var(--very-dark-blue);
-        }
+                header > .navigation-bar > .left {
+                    align-items: center;
+                }
+
+                    header > .navigation-bar > .left > .logo {
+                        margin-right: 3.5rem;
+                        height: 1.25rem;
+                        aspect-ratio: 136/20;
+                        margin-bottom: 0.25rem;
+                    }
+
+                    header > .navigation-bar > .left > ul.navigation-menu {
+                        color: var(--dark-grayish-blue);
+                        text-transform: none;
+                        font-weight: normal;
+                    }
+
+                        header > .navigation-bar > .left > ul.navigation-menu > li {
+                            margin-right: 2rem;
+                            margin-left: 0;
+                            display: inline-block;
+                        }
+
+                            header > .navigation-bar > .left > ul.navigation-menu > li > a {
+                                display: inline-block;
+                                line-height: 6.75rem;
+                                padding-bottom: 0.25rem;
+                            }
+
+                                header > .navigation-bar > .left > ul.navigation-menu > li > a:hover,
+                                header > .navigation-bar > .left > ul.navigation-menu > li > a:focus {
+                                    padding-bottom: 0 !important;
+                                    border-bottom: 0.25rem solid var(--orange);
+                                }
+
+                header > .navigation-bar > .right {
+                    align-items: center;
+                    padding-bottom: 0.25rem;
+                }
+
+                    header > .navigation-bar > .right > #view-cart-button {
+                        display: inline-block;
+                        margin-right: 2.875rem;
+                        line-height: 5rem;
+                        vertical-align: middle;
+                        background-color: inherit;
+                    }
+
+                        header > .navigation-bar > .right > #view-cart-button > span > svg.cart {
+                            height: 1.25rem;
+                            aspect-ratio: 1;
+                            vertical-align: middle;
+                        }
+
+                        header > .navigation-bar > .right > #view-cart-button > span > .cart-num-of-products {
+                            position: absolute;
+                            top: -0.2rem;
+                            right: -0.3rem;
+                            width: 1.1875rem;
+                            font-weight: bold;
+                            font-size: 0.625rem;
+                            line-height: 0.8125rem;
+                            color: var(--white);
+                            background-color: var(--orange);
+                            border-radius: 0.40625rem;
+                            display: none;
+                        }
+
+                        header > .navigation-bar > .right > #view-cart-button:hover > svg.cart,
+                        header > .navigation-bar > .right > #view-cart-button:focus > svg.cart {
+                            fill: var(--very-dark-blue);
+                        }
+
+                    header > .navigation-bar > .right > a {
+                        display: inline-block;
+                        line-height: 6.75rem;
+                        vertical-align: middle;
+                    }
+
+                        header > .navigation-bar > .right > a > .avatar {
+                            height: 3.125rem;
+                            aspect-ratio: 1;
+                            vertical-align: middle;
+                            margin: 0.25rem;
+                        }
+
+                        header > .navigation-bar > .right > a:hover > .avatar,
+                        header > .navigation-bar > .right > a:focus > .avatar {
+                            border: 0.25rem solid var(--orange);
+                            border-radius: 1.8125rem;
+                            height: 3.625rem !important;
+                            margin: 0 !important;
+                        }
+
+            header > .line {
+                border-bottom: 0.0625rem solid var(--gray);
+            }
+
+            header > #cart-popup {
+                --gap: 0;
+                position: absolute;
+                bottom: -14.8125rem;
+                right: -4.75rem;
+                min-width: 22.5rem;
+                height: 16rem;
+                z-index: 10;
+                background-color: var(--white);
+                border-radius: 0.625rem;
+                box-shadow: 0px 20px 50px -20px rgba(29, 32, 38, 0.503143);
+                display: none;
+            }
+
+                header > #cart-popup > .title {
+                    flex: 0 0 4.1875rem;
+                    border-bottom: 0.0625rem solid var(--gray);
+                    align-items: center;
+                }
+
+                    header > #cart-popup > .title > div {
+                        margin-left: 1.5rem;
+                        line-height: 1rem;
+                        color: var(--very-dark-blue);
+                        font-weight: bold;
+                    }
+
+                header > #cart-popup > .content > #empty-cart {
+                    color: var(--dark-grayish-blue);
+                    font-weight: bold;
+                    display: flex;
+                    flex: 1;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                header > #cart-popup > .content > #full-cart {
+                    padding: 1.5rem 1.5rem 2rem 1.5rem;
+                    display: none;
+                    flex: 1;
+                }
+
+                    header > #cart-popup > .content > #full-cart > .full-cart-content {
+                        align-items: center;
+                        --gap: 0;
+                        height: 3.25rem;
+                        margin-bottom: 1.5rem;
+                    }
+
+                    header > #cart-popup > .content > #full-cart > #checkout-cart-button {
+                        font-weight: bold;
+                        border-radius: 0.625rem;
+                        background-color: var(--orange);
+                        color: var(--white);
+                        line-height: 1rem;
+                        padding-top: 1.375rem;
+                        padding-bottom: 1.125rem;
+                        width: 100%;
+                    }
+
+                        header > #cart-popup > .content > #full-cart > #checkout-cart-button:hover,
+                        header > #cart-popup > .content > #full-cart > #checkout-cart-button:focus {
+                            background-color: var(--hover-orange);
+                        }
 
         svg.cart {
             fill: var(--dark-grayish-blue);
@@ -180,120 +334,180 @@
                 fill: var(--very-dark-blue);
             }
 
-        #cart-popup {
-            --gap: 0;
-            position: absolute;
-            bottom: -14.8125rem;
-            right: -4.75rem;
-            min-width: 22.5rem;
-            height: 16rem;
-            z-index: 10;
-            background-color: var(--white);
-            border-radius: 0.625rem;
-            box-shadow: 0px 20px 50px -20px rgba(29, 32, 38, 0.503143);
-            display: none;
+        /* Main */
+        main {
+            margin: 0 auto;
+            width: 63.5rem;
+            --gap: 7.8125rem;
         }
 
-            #cart-popup > .content > #full-cart > #checkout-cart-button {
-                font-weight: bold;
-                border-radius: 0.625rem;
-                background-color: var(--orange);
-                color: var(--white);
-                line-height: 1rem;
-                padding-top: 1.375rem;
-                padding-bottom: 1.125rem;
+            main > .product-images > button#main-image-button {
                 width: 100%;
+                border-radius: 0.9375rem;
+                height: 27.6rem;
+                display: block;
             }
 
-                #cart-popup > .content > #full-cart > #checkout-cart-button:hover,
-                #cart-popup > .content > #full-cart > #checkout-cart-button:focus {
-                    background-color: var(--hover-orange);
+            main > .product-images > .thumbnails {
+                margin-top: 2rem;
+                --gap: 1.9375rem;
+                height: 5.5rem;
+                justify-content: space-between;
+            }
+
+                main > .product-images > .thumbnails > button {
+                    flex: 1;
+                    border-radius: 0.625rem;
+                    position: relative;
                 }
 
-        /* Main */
-        .product-images > .thumbnails > button {
-            flex: 1;
-            border-radius: 0.625rem;
-            position: relative;
-        }
+                    main > .product-images > .thumbnails > button > .overlay {
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
+                        z-index: 10;
+                        display: none;
+                        border-radius: 0.625rem;
+                    }
 
-            .product-images > .thumbnails > button > .overlay {
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-                background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
-                z-index: 10;
-                display: none;
-                border-radius: 0.625rem;
+                    main > .product-images > .thumbnails > button > img {
+                        width: 100%;
+                        border-radius: 0.625rem;
+                    }
+
+                    main > .product-images > .thumbnails > button:hover > .overlay,
+                    main > .product-images > .thumbnails > button:focus > .overlay {
+                        display: block;
+                    }
+
+                    main > .product-images > .thumbnails > button.active > .overlay,
+                    main > .product-images > .thumbnails > button:active > .overlay {
+                        background: linear-gradient(0deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75));
+                        border: 0.125rem solid var(--orange);
+                        display: block;
+                    }
+
+            main > .product-details {
+                margin-top: 3.875rem;
             }
 
-            .product-images > .thumbnails > button > img {
-                width: 100%;
-                border-radius: 0.625rem;
-            }
+                main > .product-details > .title {
+                    text-transform: uppercase;
+                    color: var(--orange);
+                    margin-bottom: 1.6875rem;
+                    font-size: 0.8125rem;
+                    line-height: 0.8125rem;
+                    font-weight: bold;
+                }
 
-            .product-images > .thumbnails > button:hover > .overlay,
-            .product-images > .thumbnails > button:focus > .overlay {
-                display: block;
-            }
+                main > .product-details > h1 {
+                    font-size: 2.75rem;
+                    font-weight: bold;
+                    line-height: 3rem;
+                    margin-bottom: 2rem;
+                }
 
-            .product-images > .thumbnails > button.active > .overlay,
-            .product-images > .thumbnails > button:active > .overlay {
-                background: linear-gradient(0deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75));
-                border: 0.125rem solid var(--orange);
-                display: block;
-            }
+                main > .product-details > .description {
+                    color: var(--dark-grayish-blue);
+                    margin-bottom: 1.5rem;
+                }
 
-        .actions > .num-of-products-buttons > #minus-button {
-            flex: 1;
-            height: 100%;
-            background-color: var(--light-grayish-blue);
-            border-top-left-radius: 0.625rem;
-            border-bottom-left-radius: 0.625rem;
-        }
+                main > .product-details > .prices {
+                    margin-bottom: 2rem;
+                }
 
-            .actions > .num-of-products-buttons > #minus-button > svg {
-                fill: var(--orange);
-            }
+                    main > .product-details > .prices > div > .new-price {
+                        font-size: 1.75rem;
+                        line-height: 1.75rem;
+                        font-weight: bold;
+                        margin-right: 1rem;
+                        display: inline-block;
+                    }
 
-            .actions > .num-of-products-buttons > #minus-button:hover > svg,
-            .actions > .num-of-products-buttons > #minus-button:focus > svg {
-                fill: var(--hover-orange);
-            }
+                    main > .product-details > .prices > div > .discount {
+                        display: inline-block;
+                        padding: 0.4375rem 0.5rem 0.25rem 0.5rem;
+                        font-weight: bold;
+                        line-height: 1rem;
+                        color: var(--orange);
+                        background-color: var(--pale-orange);
+                        border-radius: 0.375rem;
+                    }
 
-        .actions > .num-of-products-buttons > #plus-button {
-            flex: 1;
-            height: 100%;
-            background-color: var(--light-grayish-blue);
-            border-top-right-radius: 0.625rem;
-            border-bottom-right-radius: 0.625rem;
-        }
+                    main > .product-details > .prices > .old-price {
+                        font-weight: bold;
+                        color: var(--grayish-blue);
+                        text-decoration-line: line-through;
+                    }
 
-            .actions > .num-of-products-buttons > #plus-button > svg {
-                fill: var(--orange);
-            }
+                main > .product-details > .actions > .num-of-products-buttons {
+                    --gap: 0;
+                    height: 3.5rem;
+                    width: 9.875rem;
+                    align-items: center;
+                    text-align: center;
+                    background-color: var(--light-grayish-blue);
+                    border-radius: 0.625rem;
+                }
 
-            .actions > .num-of-products-buttons > #plus-button:hover > svg,
-            .actions > .num-of-products-buttons > #plus-button:focus > svg {
-                fill: var(--hover-orange);
-            }
+                    main > .product-details > .actions > .num-of-products-buttons > #num-of-products {
+                        flex: 1;
+                        line-height: 1rem;
+                        font-weight: bold;
+                    }
 
-        .actions > #add-to-cart-button {
-            border-radius: 0.625rem;
-            background-color: var(--orange);
-            --gap: 0.97125rem;
-            padding: 1.1875rem 4.75rem 1.125rem 4.8125rem;
-            color: var(--white);
-            flex-wrap: nowrap;
-        }
+                    main > .product-details > .actions > .num-of-products-buttons > #minus-button {
+                        flex: 1;
+                        height: 100%;
+                        background-color: var(--light-grayish-blue);
+                        border-top-left-radius: 0.625rem;
+                        border-bottom-left-radius: 0.625rem;
+                    }
 
-            .actions > #add-to-cart-button:hover,
-            .actions > #add-to-cart-button:focus {
-                background-color: var(--hover-orange);
-            }
+                        main > .product-details > .actions > .num-of-products-buttons > #minus-button > svg {
+                            fill: var(--orange);
+                        }
 
+                        main > .product-details > .actions > .num-of-products-buttons > #minus-button:hover > svg,
+                        main > .product-details > .actions > .num-of-products-buttons > #minus-button:focus > svg {
+                            fill: var(--hover-orange);
+                        }
+
+                    main > .product-details > .actions > .num-of-products-buttons > #plus-button {
+                        flex: 1;
+                        height: 100%;
+                        background-color: var(--light-grayish-blue);
+                        border-top-right-radius: 0.625rem;
+                        border-bottom-right-radius: 0.625rem;
+                    }
+
+                        main > .product-details > .actions > .num-of-products-buttons > #plus-button > svg {
+                            fill: var(--orange);
+                        }
+
+                        main > .product-details > .actions > .num-of-products-buttons > #plus-button:hover > svg,
+                        main > .product-details > .actions > .num-of-products-buttons > #plus-button:focus > svg {
+                            fill: var(--hover-orange);
+                        }
+
+                main > .product-details > .actions > #add-to-cart-button {
+                    border-radius: 0.625rem;
+                    background-color: var(--orange);
+                    --gap: 0.97125rem;
+                    padding: 1.1875rem 4.75rem 1.125rem 4.8125rem;
+                    color: var(--white);
+                    flex-wrap: nowrap;
+                }
+
+                    main > .product-details > .actions > #add-to-cart-button:hover,
+                    main > .product-details > .actions > #add-to-cart-button:focus {
+                        background-color: var(--hover-orange);
+                    }
+
+        /* Lightbox Gallery */
         #lightbox {
             position: fixed;
             top: 0;
@@ -322,142 +536,156 @@
                 width: 100%;
             }
 
-                #lightbox > .content > div > .thumbnails > button > .overlay {
-                    width: 100%;
-                    height: 100%;
+                #lightbox > .content > div {
+                    width: 61.11vh;
+                    top: 14.77vh;
+                    left: 50%;
+                    transform: translate(-50%, 0);
                     position: absolute;
-                    top: 0;
-                    left: 0;
-                    background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
-                    z-index: 10;
-                    display: none;
-                    border-radius: 0.625rem;
                 }
 
-                #lightbox > .content > div > .thumbnails > button > img {
-                    width: 100%;
-                    border-radius: 0.625rem;
-                }
-
-                #lightbox > .content > div > .thumbnails > button:hover > .overlay,
-                .product-images > .thumbnails > button:focus > .overlay {
-                    display: block;
-                }
-
-                #lightbox > .content > div > .thumbnails > button.active > .overlay,
-                #lightbox > .content > div > .thumbnails > button:active > .overlay {
-                    background: linear-gradient(0deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75));
-                    border: 0.125rem solid var(--orange);
-                    display: block;
-                }
-
-                #lightbox > .content > div > #previous-button {
-                    background-color: var(--white);
-                    width: 6.22vh;
-                    height: 6.22vh;
-                    top: 26.33vh;
-                    left: -3.11vh;
-                    align-items: center;
-                    justify-content: center;
-                    position: absolute;
-                    border-radius: 3.11vh;
-                }
-
-                #lightbox > .content > div > #next-button {
-                    background-color: var(--white);
-                    width: 6.22vh;
-                    height: 6.22vh;
-                    top: 26.33vh;
-                    right: -3.11vh;
-                    align-items: center;
-                    justify-content: center;
-                    position: absolute;
-                    border-radius: 3.11vh;
-                }
-
-                    #lightbox > .content > div > #previous-button > svg,
-                    #lightbox > .content > div > #next-button > svg {
-                        width: 0.5rem;
-                        height: 1rem;
-                        stroke: var(--very-dark-blue);
+                    #lightbox > .content > div > .main-image {
+                        height: 61.11vh;
+                        border-radius: 0.9375rem;
+                        display: block;
                     }
 
-                    #lightbox > .content > div > #previous-button:hover > svg,
-                    #lightbox > .content > div > #previous-button:focus > svg,
-                    #lightbox > .content > div > #next-button:hover > svg,
-                    #lightbox > .content > div > #next-button:focus > svg {
-                        stroke: var(--orange);
-                    }
-
-                #lightbox > .content > div > #close-button {
-                    width: 2.22vh;
-                    height: 2.22vh;
-                    top: -4.88vh;
-                    right: 0;
-                    align-items: center;
-                    justify-content: center;
-                    position: absolute;
-                    background-color: transparent;
-                }
-
-                    #lightbox > .content > div > #close-button > svg {
+                    #lightbox > .content > div > .thumbnails > button > .overlay {
                         width: 100%;
                         height: 100%;
-                        fill: var(--white);
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
+                        z-index: 10;
+                        display: none;
+                        border-radius: 0.625rem;
                     }
 
-                    #lightbox > .content > div > #close-button:hover > svg,
-                    #lightbox > .content > div > #close-button:focus > svg {
-                        fill: var(--orange);
+                    #lightbox > .content > div > .thumbnails > button > img {
+                        width: 100%;
+                        border-radius: 0.625rem;
                     }
+
+                    #lightbox > .content > div > .thumbnails > button:hover > .overlay,
+                    .product-images > .thumbnails > button:focus > .overlay {
+                        display: block;
+                    }
+
+                    #lightbox > .content > div > .thumbnails > button.active > .overlay,
+                    #lightbox > .content > div > .thumbnails > button:active > .overlay {
+                        background: linear-gradient(0deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75));
+                        border: 0.125rem solid var(--orange);
+                        display: block;
+                    }
+
+                    #lightbox > .content > div > #previous-button {
+                        background-color: var(--white);
+                        width: 6.22vh;
+                        height: 6.22vh;
+                        top: 26.33vh;
+                        left: -3.11vh;
+                        align-items: center;
+                        justify-content: center;
+                        position: absolute;
+                        border-radius: 3.11vh;
+                    }
+
+                    #lightbox > .content > div > #next-button {
+                        background-color: var(--white);
+                        width: 6.22vh;
+                        height: 6.22vh;
+                        top: 26.33vh;
+                        right: -3.11vh;
+                        align-items: center;
+                        justify-content: center;
+                        position: absolute;
+                        border-radius: 3.11vh;
+                    }
+
+                        #lightbox > .content > div > #previous-button > svg,
+                        #lightbox > .content > div > #next-button > svg {
+                            width: 0.5rem;
+                            height: 1rem;
+                            stroke: var(--very-dark-blue);
+                        }
+
+                        #lightbox > .content > div > #previous-button:hover > svg,
+                        #lightbox > .content > div > #previous-button:focus > svg,
+                        #lightbox > .content > div > #next-button:hover > svg,
+                        #lightbox > .content > div > #next-button:focus > svg {
+                            stroke: var(--orange);
+                        }
+
+                    #lightbox > .content > div > #close-button {
+                        width: 2.22vh;
+                        height: 2.22vh;
+                        top: -4.88vh;
+                        right: 0;
+                        align-items: center;
+                        justify-content: center;
+                        position: absolute;
+                        background-color: transparent;
+                    }
+
+                        #lightbox > .content > div > #close-button > svg {
+                            width: 100%;
+                            height: 100%;
+                            fill: var(--white);
+                        }
+
+                        #lightbox > .content > div > #close-button:hover > svg,
+                        #lightbox > .content > div > #close-button:focus > svg {
+                            fill: var(--orange);
+                        }
     </style>
 </head>
 <body class="container">
-    <header style="margin-bottom: 5.625rem; position: relative;">
-        <div class="flex" style="--gap: 0; justify-content: space-between;">
-            <div class="left flex" style="align-items: center;">
-                <img class="logo" src="./images/logo.svg" alt="logo" style="margin-right: 3.5rem; height: 1.25rem; aspect-ratio: 136/20; margin-bottom: 0.25rem;" />
-                <ul class="navigation-menu" style="color: var(--dark-grayish-blue); text-transform: none; font-weight: normal;">
-                    <li style="margin-right: 2rem; margin-left: 0; display: inline-block;">
-                        <a href="#" style="display: inline-block; line-height: 6.75rem; padding-bottom: 0.25rem;">Collections</a>
+    <header>
+        <div class="navigation-bar flex">
+            <div class="left flex">
+                <img class="logo" src="./images/logo.svg" alt="logo" />
+                <ul class="navigation-menu">
+                    <li>
+                        <a href="#">Collections</a>
                     </li>
-                    <li style="margin-right: 2rem; margin-left: 0; display: inline-block;">
-                        <a href="#" style="display: inline-block; line-height: 6.75rem; padding-bottom: 0.25rem;">Men</a>
+                    <li>
+                        <a href="#">Men</a>
                     </li>
-                    <li style="margin-right: 2rem; margin-left: 0; display: inline-block;">
-                        <a href="#" style="display: inline-block; line-height: 6.75rem; padding-bottom: 0.25rem;">Women</a>
+                    <li>
+                        <a href="#">Women</a>
                     </li>
-                    <li style="margin-right: 2rem; margin-left: 0; display: inline-block;">
-                        <a href="#" style="display: inline-block; line-height: 6.75rem; padding-bottom: 0.25rem; ">About</a>
+                    <li>
+                        <a href="#">About</a>
                     </li>
-                    <li style="margin: 0; display: inline-block;">
-                        <a href="#" style="display: inline-block; line-height: 6.75rem; padding-bottom: 0.25rem; ">Contact</a>
+                    <li style="margin: 0;">
+                        <a href="#">Contact</a>
                     </li>
                 </ul>
             </div>
-            <div class="right flex" style="align-items: center; padding-bottom: 0.25rem;">
-                <button id="view-cart-button" style="display: inline-block; margin-right: 2.875rem; line-height: 5rem; vertical-align: middle; background-color: inherit;">
+            <div class="right flex">
+                <button id="view-cart-button">
                     <span style="position: relative;">
-                        <svg style="height: 1.25rem; aspect-ratio: 1; vertical-align: middle;" class="cart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 20"><path d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z" fill-rule="nonzero" /></svg>
-                        <span class="cart-num-of-products" style="position: absolute; top: -0.2rem; right: -0.3rem; width: 1.1875rem; font-weight: bold; font-size: 0.625rem; line-height: 0.8125rem; color: var(--white); background-color: var(--orange); border-radius: 0.40625rem; display: none;">3</span>
+                        <svg class="cart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 20"><path d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z" fill-rule="nonzero" /></svg>
+                        <span class="cart-num-of-products">3</span>
                     </span>
                 </button>
-                <a href="#" style="display: inline-block; line-height: 6.75rem; vertical-align: middle; ">
-                    <img class="avatar" src="./images/image-avatar.png" alt="avatar" style="height: 3.125rem; aspect-ratio: 1; vertical-align: middle; margin: 0.25rem;" />
+                <a href="#">
+                    <img class="avatar" src="./images/image-avatar.png" alt="avatar" />
                 </a>
             </div>
         </div>
-        <div class="line" style="border-bottom: 0.0625rem solid var(--gray);"></div>
+        <div class="line"></div>
         <div class="vertical-flex" id="cart-popup">
-            <div class="title flex" style="flex: 0 0 4.1875rem; border-bottom: 0.0625rem solid var(--gray); align-items: center;">
-                <div style="margin-left: 1.5rem; line-height: 1rem; color: var(--very-dark-blue); font-weight: bold;">Cart</div>
+            <div class="title flex">
+                <div>Cart</div>
             </div>
             <div class="content flex" style="flex: 1;">
-                <div id="empty-cart" class="flex" style="color: var(--dark-grayish-blue); font-weight: bold; display: flex; flex: 1; justify-content: center; align-items: center;">
+                <div id="empty-cart" class="flex">
                     <div>Your cart is empty.</div>
                 </div>
-                <div id="full-cart" class="vertical-flex" style="padding: 1.5rem 1.5rem 2rem 1.5rem; display: none; flex: 1;">
-                    <div class="flex" style="align-items: center; --gap: 0; height: 3.25rem; margin-bottom: 1.5rem;">
+                <div id="full-cart" class="vertical-flex">
+                    <div class="full-cart-content flex">
                         <div class="flex" style="flex: 0; margin-right: 1rem;">
                             <img src="./images/image-product-1-thumbnail.jpg" alt="product 1" style="width: 3.125rem; border-radius: 0.25rem;" />
                         </div>
@@ -475,12 +703,12 @@
             </div>
         </div>
     </header>
-    <main class="flex" style="margin: 0 auto; width: 63.5rem; --gap: 7.8125rem;">
+    <main class="flex">
         <div class="product-images" style="flex: 0 0 27.6rem;">
-            <button id="main-image-button" style="width: 100%; border-radius: 0.9375rem; height: 27.6rem; display: block;">
+            <button id="main-image-button">
                 <img class="main-image" src="./images/image-product-1.jpg" alt="product 1" style="width: 100%; border-radius: 0.9375rem;" />
             </button>
-            <div class="thumbnails flex" style="margin-top: 2rem; --gap: 1.9375rem; height: 5.5rem; justify-content: space-between;">
+            <div class="thumbnails flex">
                 <button class="active">
                     <div class="overlay"></div>
                     <img src="./images/image-product-1-thumbnail.jpg" alt="product 1" />
@@ -499,23 +727,23 @@
                 </button>
             </div>
         </div>
-        <div class="product-details" style="margin-top: 3.875rem;">
-            <div class="title" style="text-transform: uppercase; color: var(--orange); margin-bottom: 1.6875rem; font-size: 0.8125rem; line-height: 0.8125rem; font-weight: bold;">Sneaker Company</div>
-            <h1 style="font-size: 2.75rem; font-weight: bold; line-height: 3rem; margin-bottom: 2rem;">Fall Limited Edition Sneakers</h1>
-            <div class="description" style="color: var(--dark-grayish-blue); margin-bottom: 1.5rem;">These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.</div>
-            <div class="prices" style="margin-bottom: 2rem;">
+        <div class="product-details">
+            <div class="title">Sneaker Company</div>
+            <h1>Fall Limited Edition Sneakers</h1>
+            <div class="description">These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.</div>
+            <div class="prices">
                 <div class="flex" style="margin-bottom: 0.625rem; --gap: 0; align-items: center;">
-                    <h2 class="new-price" style="font-size: 1.75rem; line-height: 1.75rem; font-weight: bold; margin-right: 1rem; display: inline-block;">$125.00</h2>
-                    <div class="discount" style="display: inline-block; padding: 0.4375rem 0.5rem 0.25rem 0.5rem; font-weight: bold; line-height: 1rem; color: var(--orange); background-color: var(--pale-orange); border-radius: 0.375rem;">50%</div>
+                    <h2 class="new-price">$125.00</h2>
+                    <div class="discount">50%</div>
                 </div>
-                <div class="old-price" style="font-weight: bold; color: var(--grayish-blue); text-decoration-line: line-through;">$250.00</div>
+                <div class="old-price">$250.00</div>
             </div>
             <div class="actions flex" style="--gap: 1rem;">
-                <div class="num-of-products-buttons flex" style="--gap: 0; height: 3.5rem; width: 9.875rem; align-items: center; text-align: center; background-color: var(--light-grayish-blue); border-radius: 0.625rem;">
+                <div class="num-of-products-buttons flex">
                     <button id="minus-button">
-                        <svg width="12" height="4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path d="M11.357 3.332A.641.641 0 0 0 12 2.69V.643A.641.641 0 0 0 11.357 0H.643A.641.641 0 0 0 0 .643v2.046c0 .357.287.643.643.643h10.714Z" id="c" /></defs><use fill="#FF7E1B" fill-rule="nonzero" xlink:href="#c" /></svg>
+                        <svg width="12" height="4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path d="M11.357 3.332A.641.641 0 0 0 12 2.69V.643A.641.641 0 0 0 11.357 0H.643A.641.641 0 0 0 0 .643v2.046c0 .357.287.643.643.643h10.714Z" id="c" /></defs><use fill-rule="nonzero" xlink:href="#c" /></svg>
                     </button>
-                    <div id="num-of-products" style="flex: 1; line-height: 1rem; font-weight: bold;">0</div>
+                    <div id="num-of-products">0</div>
                     <button id="plus-button">
                         <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path d="M12 7.023V4.977a.641.641 0 0 0-.643-.643h-3.69V.643A.641.641 0 0 0 7.022 0H4.977a.641.641 0 0 0-.643.643v3.69H.643A.641.641 0 0 0 0 4.978v2.046c0 .356.287.643.643.643h3.69v3.691c0 .356.288.643.644.643h2.046a.641.641 0 0 0 .643-.643v-3.69h3.691A.641.641 0 0 0 12 7.022Z" id="b" /></defs><use fill-rule="nonzero" xlink:href="#b" /></svg>
                     </button>
@@ -531,8 +759,8 @@
     <div id="lightbox" style="display: none;">
         <div class="overlay"></div>
         <div class="content">
-            <div style="width: 61.11vh; top: 14.77vh; left: 50%; transform: translate(-50%, 0); position: absolute;">
-                <img class="main-image" src="./images/image-product-1.jpg" alt="product 1" style="height: 61.11vh; border-radius: 0.9375rem; display: block;" />
+            <div>
+                <img class="main-image" src="./images/image-product-1.jpg" alt="product 1" />
                 <div class="thumbnails flex" style="margin: 4.44vh 5.88vh 0 5.88vh; --gap: 3.44vh; height: 9.77vh; justify-content: space-between;">
                     <button class="active" style="flex: 1; border-radius: 0.625rem; position: relative;">
                         <div class="overlay"></div>
