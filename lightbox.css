@@ -1,0 +1,131 @@
+#lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 11;
+}
+
+    #lightbox > .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        opacity: 0.5;
+    }
+
+    #lightbox > .content {
+        width: 61.11vh;
+        top: 14.77vh;
+        left: 50%;
+        transform: translate(-50%, 0);
+        position: absolute;
+    }
+
+        #lightbox > .content > .main-image {
+            height: 61.11vh;
+            border-radius: 0.9375rem;
+            display: block;
+        }
+
+        #lightbox > .content > .thumbnails {
+            margin: 4.44vh 5.88vh 0 5.88vh;
+            --gap: 3.44vh;
+            height: 9.77vh;
+            justify-content: space-between;
+        }
+
+            #lightbox > .content > .thumbnails > button {
+                flex: 1;
+                position: relative;
+                border-radius: 0.625rem;
+            }
+
+                #lightbox > .content > .thumbnails > button > .overlay {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
+                    display: none;
+                    border-radius: 0.625rem;
+                }
+
+                #lightbox > .content > .thumbnails > button > img {
+                    width: 100%;
+                    border-radius: 0.625rem;
+                }
+
+                #lightbox > .content > .thumbnails > button:hover > .overlay,
+                .product-images > .thumbnails > button:focus > .overlay {
+                    display: block;
+                }
+
+                #lightbox > .content > .thumbnails > button.active > .overlay,
+                #lightbox > .content > .thumbnails > button:active > .overlay {
+                    background: linear-gradient(0deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75));
+                    border: 0.125rem solid var(--orange);
+                    display: block;
+                }
+
+        #lightbox > .content > #lightbox-previous-button {
+            background-color: var(--white);
+            width: 6.22vh;
+            height: 6.22vh;
+            top: 26.33vh;
+            left: -3.11vh;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            border-radius: 3.11vh;
+        }
+
+        #lightbox > .content > #lightbox-next-button {
+            background-color: var(--white);
+            width: 6.22vh;
+            height: 6.22vh;
+            top: 26.33vh;
+            right: -3.11vh;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            border-radius: 3.11vh;
+        }
+
+            #lightbox > .content > #lightbox-previous-button > svg,
+            #lightbox > .content > #lightbox-next-button > svg {
+                width: 0.5rem;
+                height: 1rem;
+                stroke: var(--very-dark-blue);
+            }
+
+            #lightbox > .content > #lightbox-previous-button:hover > svg,
+            #lightbox > .content > #lightbox-previous-button:focus > svg,
+            #lightbox > .content > #lightbox-next-button:hover > svg,
+            #lightbox > .content > div > #lightbox-next-button:focus > svg {
+                stroke: var(--orange);
+            }
+
+        #lightbox > .content > #close-button {
+            width: 2.22vh;
+            height: 2.22vh;
+            top: -4.88vh;
+            right: 0;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            background-color: transparent;
+        }
+
+            #lightbox > .content > #close-button > svg {
+                width: 100%;
+                height: 100%;
+                fill: var(--white);
+            }
+
+            #lightbox > .content > #close-button:hover > svg,
+            #lightbox > .content > #close-button:focus > svg {
+                fill: var(--orange);
+            }
