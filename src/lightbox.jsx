@@ -1,6 +1,5 @@
-'use strict';
-
-//const e = React.createElement;
+import React from "react";
+import './lightbox.css';
 
 class Lightbox extends React.Component {
     constructor(props) {
@@ -12,12 +11,12 @@ class Lightbox extends React.Component {
         this.state = {
             mainImageUrl: this.props.mainImageUrl,
             mainImageAlt: this.props.mainImageAlt,
-            mainImageIndex: this.props.productImageUrls.indexOf(this.props.mainImageUrl)
+            mainImageIndex: this.props.productImageUrls?.indexOf(this.props.mainImageUrl)
         };
     }
 
     handleClose() {
-        ReactDOM.unmountComponentAtNode(document.getElementById('lightbox-container'));
+        this.props.onCloseHandler();
     }
 
     handlePrevious() {
@@ -73,11 +72,11 @@ class Lightbox extends React.Component {
                 <div className="content">
                     <img className="main-image" src={this.state.mainImageUrl} alt={this.state.mainImageAlt} />
                     <div className="thumbnails flex">
-                        {this.props.productImageUrls.map((productImageUrl, index) => {
+                        {this.props.productImageUrls?.map((productImageUrl, index) => {
                             let productImageAlt = this.props.productImageAlts[index];
                             return (
                                 <button key={index}
-                                    className={`${this.state.mainImageUrl == productImageUrl ? "active" : ""}`}
+                                    className={`${this.state.mainImageUrl === productImageUrl ? "active" : ""}`}
                                     onClick={() => this.handleThumbnailClick(index)}>
                                     <div className="overlay"></div>
                                     <img src={productImageUrl.replace(".jpg", "") + "-thumbnail.jpg"} alt={productImageAlt} />
@@ -100,5 +99,4 @@ class Lightbox extends React.Component {
     }
 }
 
-//const domContainer = document.querySelector('#lightbox-container');
-//ReactDOM.render(e(Lightbox), domContainer);
+export default Lightbox;

@@ -99,7 +99,7 @@ button {
 /* ------------------- */
 @media only screen and (max-width : 767px) {
     html {
-        font-size: min(4vw, 4vh); /* 15px for 375px-viewport */
+        font-size: 4vmin; /* 15px for 375px-viewport */
     }
 
     body {
