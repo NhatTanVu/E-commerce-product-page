@@ -10,9 +10,19 @@
       content="Frontend Mentor | E-commerce product page"
     />
 	
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet">	
+	<!-- connect to domain of font files -->
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+	<!-- optionally increase loading priority -->
+	<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap">
+
+	<!-- async CSS -->
+	<link rel="stylesheet" media="print" onload="this.onload=null;this.removeAttribute('media');" href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap">
+
+	<!-- no-JS fallback -->
+	<noscript>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap">
+	</noscript>
 	
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
