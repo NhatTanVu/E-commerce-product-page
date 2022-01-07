@@ -439,18 +439,27 @@ main {
                 padding: 6.133rem 0 0 1.666rem;
             }
 
-                header > .navigation-bar > .left > ul.navigation-menu.mobile > li > a {
-                    line-height: 1.733rem;
-                    font-size: 1.2rem;
-                    font-weight: bold;
-                    color: var(--very-dark-blue);
-                    padding-bottom: 1.333rem;
+                header > .navigation-bar > .left > ul.navigation-menu.mobile > li {
+                    margin-right: 0;
                 }
 
-                    header > .navigation-bar > .left > ul.navigation-menu.mobile > li > a:focus,
-                    header > .navigation-bar > .left > ul.navigation-menu.mobile > li > a:hover {
-                        padding-bottom: 1.083rem;
+                    header > .navigation-bar > .left > ul.navigation-menu.mobile > li > a {
+                        line-height: 1.733rem;
+                        font-size: 1.2rem;
+                        font-weight: bold;
+                        color: var(--very-dark-blue);
+                        padding-top: 0.5415rem;
+                        padding-bottom: 0.5415rem;
+                        padding-left: 0.5rem;
+                        width: 100%;
                     }
+
+                        header > .navigation-bar > .left > ul.navigation-menu.mobile > li > a:focus,
+                        header > .navigation-bar > .left > ul.navigation-menu.mobile > li > a:hover {
+                            border-left: 0.25rem solid var(--orange);
+                            padding-left: 0.25rem;
+                            border-bottom: 0;
+                        }
 
         header > .navigation-bar > .left > .overlay.mobile {
             display: block;
