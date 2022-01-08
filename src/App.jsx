@@ -94,19 +94,19 @@ function App() {
                         <img className="logo" src="./images/logo.svg" alt="logo" />
                         <ul className={"navigation-menu flex " + (isMenuClosed ? "" : "mobile")}>
                             <li>
-                                <a href="/">Collections</a>
+                                <a href="./">Collections</a>
                             </li>
                             <li>
-                                <a href="/">Men</a>
+                                <a href="./">Men</a>
                             </li>
                             <li>
-                                <a href="/">Women</a>
+                                <a href="./">Women</a>
                             </li>
                             <li>
-                                <a href="/">About</a>
+                                <a href="./">About</a>
                             </li>
                             <li style={{ margin: '0' }}>
-                                <a href="/">Contact</a>
+                                <a href="./">Contact</a>
                             </li>
                         </ul>
                         <div className={"overlay " + (isMenuClosed ? "" : "mobile")}></div>
@@ -121,7 +121,7 @@ function App() {
                                 {(totalNumOfProducts > 0) && <span className="cart-num-of-products">{totalNumOfProducts}</span>}
                             </span>
                         </button>
-                        <a href="/">
+                        <a href="./">
                             <img className="avatar" src="./images/image-avatar.png" alt="avatar" />
                         </a>
                     </div>
